@@ -24,8 +24,9 @@ lables = ["A","B","C"]
 values = [0,4,5]
 
 bars = plt.bar(lables,values)
-patterns = ["/", "0", "*"]
+patterns = ["/", "O", "*"]
 
-bars[2].set_hatch('/')
+for i in bars:
+    i.set_hatch(patterns.pop())
 
 plt.show()
