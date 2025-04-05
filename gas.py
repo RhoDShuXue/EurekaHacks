@@ -21,6 +21,9 @@ ax.set_xlim(0, container_size)
 ax.set_ylim(0, container_size)
 plt.gca().set_aspect("equal", adjustable = "box")
 
+plt.xticks([])
+plt.yticks([])
+
 for steps in range(time_steps):
     positions += velocity
 
