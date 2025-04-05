@@ -24,7 +24,9 @@ ax.set_xlim(0, container_size)
 ax.set_ylim(0, container_size)
 plt.gca().set_aspect("equal", adjustable = "box")
 
-collisions = []
+# Create masks to track active particles
+active_hydro = np.ones(hydro_particles, dtype=bool)
+active_oxy = np.ones(oxy_particles, dtype=bool)
 
 plt.xticks([])
 plt.yticks([])
@@ -35,21 +37,32 @@ for steps in range(1000):
     num_collision = 0
 
     for a in range(hydro_particles):
-        for b in range(2):
-            if hydro_pos[a,b] < 0 or hydro_pos[a,b] > 1:
-                hydroV[a,b] *= -1
-                num_collision += 1
+        if active_hydro[a]:
+            for b in range(2):
+                if hydro_pos[a, b] < 0 or hydro_pos[a, b] > 1:
+                    hydroV[a, b] *= -1
 
     for c in range(oxy_particles):
-        for d in range(2):
-            if oxy_pos[c,d] < 0 or oxy_pos[c,d] > 1:
-                oxyV[c,d] *= -1
-                num_collision += 1
+        if active_oxy[c]:
+            for d in range(2):
+                if oxy_pos[c, d] < 0 or oxy_pos[c, d] > 1:
+                    oxyV[c, d] *= -1
 
-    collisions = np.append(collisions, num_collision)
+    # Collision Checker
+    for i in range(hydro_particles):
+        if active_hydro[i]:
+            for j in range(oxy_particles):
+                if active_oxy[j]:
+                    if np.linalg.norm(hydro_pos[i] - oxy_pos[j]) < 0.02:
+                        active_hydro[i] = False
+                        active_oxy[j] = False
 
-    hydroScatter.set_offsets(hydro_pos)
-    oxyScatter.set_offsets(oxy_pos)
+    hydro_pos_active = hydro_pos[active_hydro]
+    oxy_pos_active = oxy_pos[active_oxy]
+
+    hydroScatter.set_offsets(hydro_pos_active)
+    oxyScatter.set_offsets(oxy_pos_active)
+
     plt.pause(0.1)
 
 plt.show()
