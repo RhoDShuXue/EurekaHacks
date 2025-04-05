@@ -14,7 +14,8 @@ plt.xlabel("x-axis")
 plt.ylabel("y-axis")
 
 plt.plot(x1,y1, color = "red", marker = '.', markersize = '10')
-plt.plot(x2,x2 ** (1/2), "b.-")
+plt.plot(x2[:5],x2[:5] ** (1/2), "b.-")
+plt.plot(x2[4:],x2[4:] ** (1/2), "b--")
 #Shorthand: 'r.-'
 
 plt.show()
