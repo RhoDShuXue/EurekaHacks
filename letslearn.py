@@ -7,8 +7,6 @@ y1 = [2,4,6,8]
 
 x2 = np.arange(0,5,0.25)
 
-
-
 plt.title("I'm Crashing Out", fontdict = {"fontsize": 20})
 plt.xlabel("x-axis")
 plt.ylabel("y-axis")
