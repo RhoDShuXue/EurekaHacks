@@ -35,4 +35,5 @@ for steps in range(time_steps):
     scatter.set_offsets(positions)
     plt.pause(0.1)
 
+
 plt.show()
