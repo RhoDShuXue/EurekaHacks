@@ -2,6 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+import matplotlib
+matplotlib.use("TkAgg")
+
+
+
 num_particles = 100
 container_size = 1
 time_steps = 1000
