@@ -26,7 +26,6 @@ values = [0,4,5]
 bars = plt.bar(lables,values)
 patterns = ["/", "0", "*"]
 
-
 bars[2].set_hatch('/')
 
 plt.show()
