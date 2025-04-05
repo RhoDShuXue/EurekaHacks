@@ -16,4 +16,15 @@ ax.set_xlim(0, container_size)
 ax.set_ylim(0, container_size)
 plt.gca().set_aspect("equal", adjustable = "box")
 
+for steps in range(time_steps):
+    positions += velocity
+
+    for i in range(num_particles):
+        for j in range(2):
+            if positions[i,j] < 0 or positions[i,j] > 1:
+                velocity[i,j] *= -1
+
+    scatter.set_offsets(positions)
+    plt.pause(0.1)
+
 plt.show()
