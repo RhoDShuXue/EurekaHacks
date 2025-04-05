@@ -17,7 +17,6 @@ hydroV = np.random.rand(hydro_particles, 2) * particles_speed
 oxy_pos = np.random.rand(oxy_particles, 2) * container_size
 oxyV = np.random.rand(oxy_particles, 2) * particles_speed
 
-
 fig,ax = plt.subplots()
 hydroScatter = ax.scatter(hydro_pos[:,0], hydro_pos[:,1], color = "#63C6EA", marker = "o")
 oxyScatter = ax.scatter(oxy_pos[:,0], oxy_pos[:,1], color = "#E97225", marker = "o")
