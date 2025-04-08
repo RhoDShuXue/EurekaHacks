@@ -4,8 +4,8 @@ import pandas as pd
 import matplotlib
 matplotlib.use("TkAgg")
 
-hydro_particles = 100
-oxy_particles = 50
+hydro_particles = 500
+oxy_particles = 250
 container_size =1
 particles_speed= 0.1
 
@@ -27,8 +27,8 @@ active_oxy = np.ones(oxy_particles, dtype = bool)
 plt.xticks([])
 plt.yticks([])
 
-orangeBall = []
-max_orangeBall = 25
+redBall = []
+max_redBall = 25
 
 for steps in range(1000):
     hydro_pos += hydroV
@@ -51,10 +51,10 @@ for steps in range(1000):
             for j in range(oxy_particles):
                 if active_oxy[j]:
                     if np.linalg.norm(hydro_pos[i] - oxy_pos[j]) < 0.02:
-                        if max_orangeBall < (len(orangeBall)) * 0.6:
-                            orange_ball_position = (hydro_pos[i] + oxy_pos[j]) / 2
-                            orangeBall.append(orange_ball_position)
-                            max_orangeBall += 1
+                        if max_redBall < (len(redBall)) * 0.6:
+                            red_ball_position = (hydro_pos[i] + oxy_pos[j]) / 2
+                            redBall.append(red_ball_position)
+                            max_redBall += 1
                         active_hydro[i] = False
                         active_oxy[j] = False
 
@@ -64,23 +64,23 @@ for steps in range(1000):
     hydroScatter.set_offsets(hydro_pos_active)
     oxyScatter.set_offsets(oxy_pos_active)
 
-    for ball in orangeBall:
-        circle = plt.Circle(ball, 0.01, color = 'orange', alpha = 0.5)
+    for ball in redBall:
+        circle = plt.Circle(ball, 0.01, color = "red", alpha = 0.5)
         ax.add_artist(circle)
 
     plt.pause(0.2)
 
-orange_balls = np.array(orangeBall)
+red_balls = np.array(redBall)
 
 for _ in range(100):
     ax.collections.clear()
-    orange_balls[:, 1] -= 0.01
-    orange_balls[:, 1] = np.maximum(orange_balls[:, 1], 0)
+    red_balls[:, 1] -= 0.01
+    red_balls[:, 1] = np.maximum(red_balls[:, 1], 0)
     hydroScatter.set_offsets(hydro_pos_active)
     oxyScatter.set_offsets(oxy_pos_active)
 
-    for ball in orange_balls:
-        circle = plt.Circle(ball, 0.01, color = 'orange', alpha = 0.5)
+    for ball in red_balls:
+        circle = plt.Circle(ball, 0.01, color = "red", alpha = 0.5)
         ax.add_artist(circle)
 
     plt.pause(0.2)
